@@ -19,11 +19,9 @@
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- 引入Vue.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.js"></script>
   </head>
   <body>
-    <div id="app" class="modern-theme">
+    <div id="about-app" class="modern-theme">
       <!-- 主要内容区域 -->
       <main>
         <!-- 团队介绍区域 -->
@@ -360,48 +358,5 @@
 
     <script src="js/script.js"></script>
     <script src="js/about.js"></script>
-    <script>
-      // 为新添加的元素添加滚动动画
-      document.addEventListener("DOMContentLoaded", function () {
-        const observerOptions = {
-          threshold: 0.1,
-          rootMargin: "0px 0px -50px 0px",
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        }, observerOptions);
-
-        // 观察所有需要淡入动画的元素
-        document
-          .querySelectorAll(
-            ".tech-card, .project-card, .mission-stats, .contact-method, .section-header"
-          )
-          .forEach((el) => {
-            observer.observe(el);
-          });
-
-        // 创建粒子效果
-        const heroSection = document.querySelector(".hero-particles");
-        if (heroSection) {
-          for (let i = 0; i < 50; i++) {
-            const particle = document.createElement("span");
-            particle.classList.add("particle");
-            particle.style.left = Math.random() * 100 + "%";
-            particle.style.top = Math.random() * 100 + "%";
-            particle.style.width = Math.random() * 10 + 1 + "px";
-            particle.style.height = particle.style.width;
-            particle.style.animationDuration = Math.random() * 10 + 8 + "s";
-            particle.style.animationDelay = Math.random() * 5 + "s";
-            heroSection.appendChild(particle);
-          }
-        }
-      });
-    </script>
   </body>
 </html>

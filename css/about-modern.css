@@ -42,7 +42,6 @@
 }
 
 .modern-theme main {
-  overflow: hidden;
   position: relative;
 }
 
@@ -298,7 +297,6 @@
 .section {
   padding: 120px 0;
   position: relative;
-  overflow: hidden;
 }
 
 .section-mission {
