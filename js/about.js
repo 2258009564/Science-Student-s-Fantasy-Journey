@@ -70,7 +70,7 @@
   // fade-in observer — 用 requestIdleCallback 或 setTimeout 确保布局完成后再观察
   const initFadeObserver = () => {
     const fadeElements = document.querySelectorAll(
-      ".tech-card, .project-card, .project-showcase, .mission-stats, .contact-method, .contact-content, .section-header, .mission-text, .mission-image, .team-member-card, .team-leader"
+      ".tech-card, .project-card, .project-showcase, .mission-stats, .contact-method, .contact-content, .section-header, .mission-text, .mission-image, .team-member-card, .team-leader, .recognition-content, .recognition-highlight"
     );
 
     if ("IntersectionObserver" in window) {
