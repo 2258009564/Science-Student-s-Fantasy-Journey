@@ -12,14 +12,17 @@ const currentPage = (() => {
 // ---- 共享：IntersectionObserver（单例） ----
 const createFadeObserver = (options = {}) => {
   const defaults = { threshold: 0.15, rootMargin: "0px 0px -60px 0px" };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { ...defaults, ...options });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { ...defaults, ...options },
+  );
   return observer;
 };
 
@@ -73,7 +76,8 @@ const init3DCardHover = (selector) => {
         cancelAnimationFrame(rafId);
         rafId = null;
       }
-      card.style.transform = "perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)";
+      card.style.transform =
+        "perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)";
       card.style.transition = "transform 0.5s ease, background-image 0.5s ease";
       card.style.backgroundImage = "";
     });
@@ -114,37 +118,43 @@ if (currentPage === "index") {
             id: 1,
             iconClass: "ri-time-line",
             title: "沉浸式时空穿越",
-            description: "体验从现代穿越到北宋的奇妙旅程，与历史名人沈括面对面交流，亲历古代科学探索的过程。",
+            description:
+              "体验从现代穿越到北宋的奇妙旅程，与历史名人沈括面对面交流，亲历古代科学探索的过程。",
           },
           {
             id: 2,
             iconClass: "ri-flask-line",
             title: "科学实验玩法",
-            description: "通过互动实验验证古代科学原理，从小孔成像到磁针偏角，亲手操作并解锁物理学原理卡牌。",
+            description:
+              "通过互动实验验证古代科学原理，从小孔成像到磁针偏角，亲手操作并解锁物理学原理卡牌。",
           },
           {
             id: 3,
             iconClass: "ri-book-open-line",
             title: "史实与教育融合",
-            description: "基于《梦溪笔谈》等历史文献，还原北宋时期的科学成就，在游戏中学习物理学知识。",
+            description:
+              "基于《梦溪笔谈》等历史文献，还原北宋时期的科学成就，在游戏中学习物理学知识。",
           },
           {
             id: 4,
             iconClass: "ri-compass-3-line",
             title: "探索开放世界",
-            description: "在精心还原的北宋场景中自由探索，从小镇到汴京，再到梦溪园，体验古代中国的风貌。",
+            description:
+              "在精心还原的北宋场景中自由探索，从小镇到汴京，再到梦溪园，体验古代中国的风貌。",
           },
           {
             id: 5,
             iconClass: "ri-movie-line",
             title: "分支剧情选择",
-            description: "做出不同的选择将影响游戏进程和结局，多种结局等待发现，体验不同的历史可能性。",
+            description:
+              "做出不同的选择将影响游戏进程和结局，多种结局等待发现，体验不同的历史可能性。",
           },
           {
             id: 6,
             iconClass: "ri-headphone-line",
             title: "古风音乐配乐",
-            description: "原创古典音乐配乐，与游戏场景完美融合，让您沉浸在北宋的文化氛围中。",
+            description:
+              "原创古典音乐配乐，与游戏场景完美融合，让您沉浸在北宋的文化氛围中。",
           },
         ],
       };
@@ -152,7 +162,7 @@ if (currentPage === "index") {
 
     methods: {
       downloadGame() {
-        const downloadLink = "downloads/installer/MazeExplorer.exe";
+        const downloadLink = "downloads/installer/枢焰光极源程序.zip";
         this.showDownloadModal(downloadLink);
         console.log("游戏下载已启动", {
           gameTitle: this.gameTitle,
@@ -257,7 +267,8 @@ if (currentPage === "index") {
 
         requestAnimationFrame(() => {
           modal.style.opacity = "1";
-          modal.querySelector(".download-modal-content").style.transform = "translateY(0) scale(1)";
+          modal.querySelector(".download-modal-content").style.transform =
+            "translateY(0) scale(1)";
         });
 
         // 进度条动画
@@ -269,9 +280,11 @@ if (currentPage === "index") {
 
           if (progress >= 100) {
             clearInterval(progressInterval);
-            modal.querySelector(".download-animation i").className = "ri-arrow-down-circle-line";
+            modal.querySelector(".download-animation i").className =
+              "ri-arrow-down-circle-line";
             modal.querySelector(".download-animation").style.color = "#5a3921";
-            modal.querySelector(".download-modal-body p").textContent = "下载即将开始，请稍候...";
+            modal.querySelector(".download-modal-body p").textContent =
+              "下载即将开始，请稍候...";
 
             setTimeout(() => {
               const link = document.createElement("a");
@@ -281,7 +294,8 @@ if (currentPage === "index") {
               link.click();
               document.body.removeChild(link);
 
-              modal.querySelector(".download-modal-body p").textContent = "下载已开始，您将在旅程中遇见古代智者沈括";
+              modal.querySelector(".download-modal-body p").textContent =
+                "下载已开始，您将在旅程中遇见古代智者沈括";
             }, 800);
           }
         }, 20);
@@ -289,7 +303,8 @@ if (currentPage === "index") {
         // 关闭
         const closeModal = () => {
           modal.style.opacity = "0";
-          modal.querySelector(".download-modal-content").style.transform = "translateY(20px) scale(0.98)";
+          modal.querySelector(".download-modal-content").style.transform =
+            "translateY(20px) scale(0.98)";
           setTimeout(() => {
             if (document.body.contains(modal)) {
               document.body.removeChild(modal);
@@ -317,7 +332,10 @@ if (currentPage === "index") {
       scrollToSection(sectionId) {
         const targetElement = document.querySelector(sectionId);
         if (targetElement) {
-          window.scrollTo({ top: targetElement.offsetTop - 80, behavior: "smooth" });
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: "smooth",
+          });
         }
       },
     },
@@ -335,7 +353,7 @@ if (currentPage === "index") {
       const observer = createFadeObserver();
       document
         .querySelectorAll(
-          ".section, .fade-in, .ancient-feature-card, .ancient-chapter-card, .hero-content, .download-content"
+          ".section, .fade-in, .ancient-feature-card, .ancient-chapter-card, .hero-content, .download-content",
         )
         .forEach((el) => observer.observe(el));
 
@@ -362,10 +380,16 @@ if (currentPage === "index") {
       });
 
       // 导航悬停
-      const navLinks = document.querySelectorAll(".nav-link:not(.nav-highlight)");
+      const navLinks = document.querySelectorAll(
+        ".nav-link:not(.nav-highlight)",
+      );
       navLinks.forEach((link) => {
-        link.addEventListener("mouseenter", () => link.classList.add("ancient-hover"));
-        link.addEventListener("mouseleave", () => link.classList.remove("ancient-hover"));
+        link.addEventListener("mouseenter", () =>
+          link.classList.add("ancient-hover"),
+        );
+        link.addEventListener("mouseleave", () =>
+          link.classList.remove("ancient-hover"),
+        );
       });
 
       // 3D 卡片悬停
@@ -373,32 +397,38 @@ if (currentPage === "index") {
 
       // 视差滚动
       let parallaxTicking = false;
-      window.addEventListener("scroll", () => {
-        if (!parallaxTicking) {
-          requestAnimationFrame(() => {
-            const scrollY = window.scrollY;
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (!parallaxTicking) {
+            requestAnimationFrame(() => {
+              const scrollY = window.scrollY;
 
-            const heroSection = document.querySelector(".hero-section");
-            if (heroSection) {
-              heroSection.style.backgroundPositionY = `${scrollY * 0.2}px`;
-            }
+              const heroSection = document.querySelector(".hero-section");
+              if (heroSection) {
+                heroSection.style.backgroundPositionY = `${scrollY * 0.2}px`;
+              }
 
-            const downloadSection = document.querySelector(".section-download");
-            if (downloadSection) {
-              downloadSection.style.backgroundPositionY = `${-scrollY * 0.1}px`;
-            }
+              const downloadSection =
+                document.querySelector(".section-download");
+              if (downloadSection) {
+                downloadSection.style.backgroundPositionY = `${-scrollY * 0.1}px`;
+              }
 
-            const cloudDecorators = document.querySelectorAll(".cloud-decorator");
-            cloudDecorators.forEach((cloud, index) => {
-              const direction = index % 2 === 0 ? 1 : -1;
-              cloud.style.transform = `translate(${scrollY * 0.03 * direction}px, ${scrollY * 0.01}px) rotate(${index * 10}deg)`;
+              const cloudDecorators =
+                document.querySelectorAll(".cloud-decorator");
+              cloudDecorators.forEach((cloud, index) => {
+                const direction = index % 2 === 0 ? 1 : -1;
+                cloud.style.transform = `translate(${scrollY * 0.03 * direction}px, ${scrollY * 0.01}px) rotate(${index * 10}deg)`;
+              });
+
+              parallaxTicking = false;
             });
-
-            parallaxTicking = false;
-          });
-          parallaxTicking = true;
-        }
-      }, { passive: true });
+            parallaxTicking = true;
+          }
+        },
+        { passive: true },
+      );
 
       // 浮动装饰元素（仅桌面端）
       if (window.innerWidth > 768) {
