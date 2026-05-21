@@ -55,8 +55,10 @@
       const projectImage = projectCard.querySelector(".project-image");
       const projectInfo = projectCard.querySelector(".project-info");
 
-      if (projectImage) projectImage.style.transform = `translate(${moveX * -1}px, ${moveY * -1}px)`;
-      if (projectInfo) projectInfo.style.transform = `translate(${moveX * 0.5}px, ${moveY * 0.5}px)`;
+      if (projectImage)
+        projectImage.style.transform = `translate(${moveX * -1}px, ${moveY * -1}px)`;
+      if (projectInfo)
+        projectInfo.style.transform = `translate(${moveX * 0.5}px, ${moveY * 0.5}px)`;
     });
 
     projectCard.addEventListener("mouseleave", () => {
@@ -70,7 +72,7 @@
   // fade-in observer — 用 requestIdleCallback 或 setTimeout 确保布局完成后再观察
   const initFadeObserver = () => {
     const fadeElements = document.querySelectorAll(
-      ".tech-card, .project-card, .project-showcase, .mission-stats, .contact-method, .contact-content, .section-header, .mission-text, .mission-image, .team-member-card, .team-leader, .recognition-content, .recognition-highlight"
+      ".fade-in, .tech-card, .project-card, .project-showcase, .mission-stats, .mission-stats-modern, .mission-card, .contact-method, .contact-content, .section-header, .mission-text, .mission-image, .team-member-card, .team-leader, .recognition-content, .recognition-highlight",
     );
 
     if ("IntersectionObserver" in window) {
@@ -83,7 +85,7 @@
             }
           });
         },
-        { threshold: 0.1 }
+        { threshold: 0.1 },
       );
 
       fadeElements.forEach((el) => observer.observe(el));
@@ -132,6 +134,45 @@
       heroParticles.appendChild(particle);
     }
   }
+
+  // 统计数字计数动画
+  const initCountUp = () => {
+    const statNumbers = document.querySelectorAll(".mission-stats-modern .stat-number");
+    if (!statNumbers.length) return;
+
+    if ("IntersectionObserver" in window) {
+      const statsObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              const text = el.textContent.trim();
+              const match = text.match(/^(\d+)/);
+              if (match) {
+                const target = parseInt(match[1], 10);
+                const suffix = text.replace(match[1], "");
+                let current = 0;
+                const step = Math.max(1, Math.floor(target / 30));
+                const timer = setInterval(() => {
+                  current += step;
+                  if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                  }
+                  el.textContent = current + suffix;
+                }, 40);
+              }
+              statsObserver.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.3 },
+      );
+      statNumbers.forEach((el) => statsObserver.observe(el));
+    }
+  };
+
+  requestAnimationFrame(initCountUp);
 
   // 平滑滚动（about 页面专属的锚点导航）
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
